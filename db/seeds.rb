@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# require 'securerandom'
+5.times do
+	p = Property.new
+	p.name = Faker::Company.name + " Hotel"
+	p.access_code = SecureRandom.hex(3)
+	p.save
+
+	a = p.address.build
+	a.address1 = Faker::Address.street_address
+	a.city = Faker::Address.city
+	a.state = Faker::Address.state
+	a.zip = Faker::Address.zip
+	a.country = Faker::Address.country
+	a.telephone = Faker::PhoneNumber.cell_phone
+end

@@ -21,4 +21,10 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+## Polymorphic Associations
+
+http://www.xyzpub.com/en/ruby-on-rails/4.0/activerecord_polymorphic.html
+
+http://stackoverflow.com/questions/3926516/how-best-to-associate-an-address-to-multiple-models-in-rails
+
+## 
