@@ -50,6 +50,7 @@ group :development do
 
   gem 'annotate'
   gem 'rails-erd'
+  gem 'faker' # Generate fake data
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
