@@ -7,16 +7,20 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # require 'securerandom'
 5.times do
-	p = Property.new
-	p.name = Faker::Company.name + " Hotel"
-	p.access_code = SecureRandom.hex(3)
-	p.save
-
-	a = p.address.build
+	a = Address.new
 	a.address1 = Faker::Address.street_address
 	a.city = Faker::Address.city
 	a.state = Faker::Address.state
 	a.zip = Faker::Address.zip
 	a.country = Faker::Address.country
-	a.telephone = Faker::PhoneNumber.cell_phone
+	a.phone = Faker::PhoneNumber.cell_phone
+	a.save
+
+	p = Property.new
+	p.name = Faker::Company.name + " Hotel"
+	puts p.name
+	p.access_code = SecureRandom.hex(3)
+	p.address = a
+	p.save
+
 end

@@ -5,40 +5,42 @@
   <%= @property.name %>
 </p>
 
-<p>
-  <strong>Address 1:</strong>
-  <%= @address.address1 %>
-</p>
+<% if (@address != nil) %>
+  <p>
+    <strong>Address 1:</strong>
+    <%= @address.address1 %>
+  </p>
 
-<p>
-  <strong>Address 2:</strong>
-  <%= @address.address2 %>
-</p>
+  <p>
+    <strong>Address 2:</strong>
+    <%= @address.address2 %>
+  </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @address.city %>
-</p>
+  <p>
+    <strong>City:</strong>
+    <%= @address.city %>
+  </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @address.state %>
-</p>
+  <p>
+    <strong>State:</strong>
+    <%= @address.state %>
+  </p>
 
-<p>
-  <strong>Zip:</strong>
-  <%= @address.zip %>
-</p>
+  <p>
+    <strong>Zip:</strong>
+    <%= @address.zip %>
+  </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @address.country %>
-</p>
+  <p>
+    <strong>Country:</strong>
+    <%= @address.country %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @address.phone %>
-</p>
+  <p>
+    <strong>Phone:</strong>
+    <%= @address.phone %>
+  </p>
+<% end %>
 
 <p>
   <strong>Access code:</strong>
