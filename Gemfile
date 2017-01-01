@@ -38,6 +38,9 @@ gem 'jbuilder', '~> 2.5'
 # validate, display and save phone numbers
 gem 'phony_rails'
 
+# Flexible authentication solution
+gem 'devise'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
