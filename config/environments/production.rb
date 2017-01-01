@@ -83,4 +83,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Configure ActionMailer for devise
+  # source: http://railsapps.github.io/rails-send-email.html
+  config.action_mailer.default_url_options = { :host => 'example.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default :charset => "utf-8"
 end
