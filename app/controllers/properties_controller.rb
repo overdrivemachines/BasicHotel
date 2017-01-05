@@ -4,7 +4,11 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
+    if (current_user.property == nil)
+      @properties = Property.all
+    else
+      render "show"
+    end
   end
 
   # GET /properties/1
@@ -49,6 +53,38 @@ class PropertiesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @property.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def current_user_joins_property
+    if (current_user.property != nil)
+      render "index"
+      return
+    end
+    
+    pid = params[:user][:property_id].to_i
+
+    if ((pid == nil) || (pid == 0))
+      flash[:error] = "Property not selected or does not exist"
+      render "index"
+      return
+    end
+
+    if (Property.find(pid).access_code == params[:access_code])
+      current_user.property_id = pid
+    else
+      flash[:error] = "Access Code does not match"
+      render "index"
+      # raise flash.inspect
+      return
+    end
+
+    if (current_user.save)
+      redirect_to current_user.property, notice: "Joined property"
+    else
+      flash[:error] = "Could not join property"
+      render "index"
+      return
     end
   end
 
