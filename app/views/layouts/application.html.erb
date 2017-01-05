@@ -10,9 +10,11 @@
 
   <body>
     <% if user_signed_in? %>
-      <%= link_to "Reservations", "#" %> | 
-      <%= link_to "Reports", "#" %> | 
-      <%= link_to "Settings", "#" %> | 
+      <% if current_user.property != nil %>
+        <%= link_to "Reservations", "#" %> | 
+        <%= link_to "Reports", "#" %> | 
+        <%= link_to "Settings", "#" %> | 
+      <% end %>
       Logged in as <strong><%= current_user.email %></strong>.
       <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
       <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
@@ -24,8 +26,14 @@
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="error"><%= flash[:error] %></div>
     <% end %>
     
     <%= yield %>
