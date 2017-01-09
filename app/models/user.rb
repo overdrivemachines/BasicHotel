@@ -48,8 +48,8 @@ class User < ApplicationRecord
 	validates :lastname, presence: true
 	# Usernames can only be in the format dc366
 	validates :username, presence: true, 
-		uniqueness: true, 
-		exclusion: { in: %w(admin superuser manager man mgr super user usr)	} #, 
+		uniqueness: true 
+		# exclusion: { in: %w(admin superuser manager man mgr super user usr)	} #, 
 		#format: { with: /[a-z]{2}[\d]{1,}/ }
 	validates :email,
 		uniqueness: true #, format: { with: // }
