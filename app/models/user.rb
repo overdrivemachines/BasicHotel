@@ -56,8 +56,13 @@ class User < ApplicationRecord
 
 	private
 		def set_username
+			# raise self.inspect
 			# TODO: Set the number
-			self.username = firstname[0].downcase + lastname[0].downcase + "10"
+			if (self.firstname == nil) || (self.lastname == nil)
+				self.username = "invalid"
+			else
+				self.username = self.firstname[0].downcase + self.lastname[0].downcase + (User.last.id + 1).to_s
+			end
 			# puts "*** Username = " + self.username
 		end
 end
