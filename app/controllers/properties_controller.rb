@@ -7,7 +7,7 @@ class PropertiesController < ApplicationController
     if (current_user.property == nil)
       @properties = Property.all
     else
-      render "show"
+      redirect_to current_user.property
     end
   end
 
@@ -19,7 +19,16 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
+    @address = Address.new
+    @address.address1 = Faker::Address.street_address
+    @address.city = Faker::Address.city
+    @address.state = Faker::Address.state
+    @address.zip = Faker::Address.zip
+    @address.country = Faker::Address.country
+    @address.phone = Faker::PhoneNumber.cell_phone
+    
     @property = Property.new
+    @property.name = Faker::Company.name
   end
 
   # GET /properties/1/edit
@@ -29,16 +38,28 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
-    @property = Property.new(property_params)
+    # Save the address
+    @address = Address.new(address_params)
+    if @address.save
+      puts "Address Created by #{current_user}"
+    else
+      # Address couldn't be saved
+      render :new
+      return
+    end
 
-    respond_to do |format|
-      if @property.save
-        format.html { redirect_to @property, notice: 'Property was successfully created.' }
-        format.json { render :show, status: :created, location: @property }
-      else
-        format.html { render :new }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
-      end
+    # Save the property
+    @property = Property.new(property_params)
+    @property.access_code = SecureRandom.hex(3)
+    @property.address = @address
+
+    if @property.save
+      # set the current user's property
+      current_user.property_id = @property.id
+      current_user.save
+      redirect_to properties_url, notice: 'Property was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -57,32 +78,38 @@ class PropertiesController < ApplicationController
   end
 
   def current_user_joins_property
+    # if current user already belongs to a property
     if (current_user.property != nil)
-      render "index"
+      redirect_to current_user.property
       return
     end
     
+    # get property id from params
     pid = params[:user][:property_id].to_i
 
+    # http://stackoverflow.com/questions/1017210/rails-flash-message-remains-for-two-page-loads
+    
+    # if property id is 0 or null
     if ((pid == nil) || (pid == 0))
-      flash[:error] = "Property not selected or does not exist"
+      flash.now[:error] = "Property not selected or does not exist"
       render "index"
       return
     end
 
+    # check access code
     if (Property.find(pid).access_code == params[:access_code])
       current_user.property_id = pid
     else
-      flash[:error] = "Access Code does not match"
+      flash.now[:error] = "Access Code does not match"
       render "index"
-      # raise flash.inspect
       return
     end
 
+    # save current user
     if (current_user.save)
       redirect_to current_user.property, notice: "Joined property"
     else
-      flash[:error] = "Could not join property"
+      flash.now[:error] = "Could not join property"
       render "index"
       return
     end
@@ -107,5 +134,9 @@ class PropertiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
       params.require(:property).permit(:name, :notes)
+    end
+
+    def address_params
+      params.require(:address).permit(:address1, :address2, :city, :state, :zip, :country, :phone, :fax, :email)
     end
 end
