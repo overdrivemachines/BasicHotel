@@ -34,13 +34,21 @@
 #
 
 Rails.application.routes.draw do
-	# Guide: http://www.theodinproject.com/courses/ruby-on-rails/lessons/routing
+	# Guide: 
+	# http://www.theodinproject.com/courses/ruby-on-rails/lessons/routing
+	
+	# Best Practices:
+	# https://github.com/bbatsov/rails-style-guide
+
+	root 'properties#index'
 	devise_for :users, :controllers => { 
 		registrations: "users/registrations"
 	}
-	root 'properties#index'
-	resources :properties
 
-	match 'properties', to: 'properties#current_user_joins_property', via: [:post, :patch]
+	resources :properties do
+		# PATCH does a partial update and PUT is used to update the whole resource
+		patch 'current_user_joins', on: :collection
+	end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
