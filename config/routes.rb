@@ -35,7 +35,9 @@
 
 Rails.application.routes.draw do
 	# Guide: http://www.theodinproject.com/courses/ruby-on-rails/lessons/routing
-	devise_for :users
+	devise_for :users, :controllers => { 
+		registrations: "users/registrations"
+	}
 	root 'properties#index'
 	resources :properties
 
