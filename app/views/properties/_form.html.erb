@@ -16,6 +16,48 @@
     <%= f.text_field :name %>
   </div>
 
+  <!-- http://apidock.com/rails/ActionView/Helpers/FormHelper/fields_for -->
+  <!-- http://stackoverflow.com/questions/892624/how-to-handle-multiple-models-in-a-rails-form -->
+  <!-- http://theartandscienceofruby.com/2015/08/20/multiple-models-in-a-single-form/ -->
+  <%= fields_for @address do |fa| %>
+    <div class="field">
+      <%= fa.label :address1 %>
+      <%= fa.text_field :address1 %>
+    </div>
+    <div class="field">
+      <%= fa.label :address2 %>
+      <%= fa.text_field :address2 %>
+    </div>
+    <div class="field">
+      <%= fa.label :city %>
+      <%= fa.text_field :city %>
+    </div>
+    <div class="field">
+      <%= fa.label :state %>
+      <%= fa.text_field :state %>
+    </div>
+    <div class="field">
+      <%= fa.label :zip %>
+      <%= fa.text_field :zip %>
+    </div>
+    <div class="field">
+      <%= fa.label :country %>
+      <%= fa.text_field :country %>
+    </div>
+    <div class="field">
+      <%= fa.label :phone %>
+      <%= fa.text_field :phone %>
+    </div>
+    <div class="field">
+      <%= fa.label :fax %>
+      <%= fa.text_field :fax %>
+    </div>
+    <div class="field">
+      <%= fa.label :email %>
+      <%= fa.text_field :email %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :notes %>
     <%= f.text_area :notes %>
