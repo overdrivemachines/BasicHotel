@@ -33,6 +33,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1/edit
   def edit
+    @address = @property.address
   end
 
   # POST /properties
@@ -77,7 +78,8 @@ class PropertiesController < ApplicationController
     end
   end
 
-  def current_user_joins_property
+  # PATCH /properties/current_user_joins
+  def current_user_joins
     # if current user already belongs to a property
     if (current_user.property != nil)
       redirect_to current_user.property
