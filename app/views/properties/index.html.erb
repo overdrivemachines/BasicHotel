@@ -2,7 +2,7 @@
 <!-- This page is shown only when current_user does not belong to any property -->
 <h1>Join Property</h1>
 
-<%= form_for current_user, url: {action: "current_user_joins_property"} do |f| %>
+<%= form_for current_user, url: current_user_joins_properties_path, method: :patch do |f| %>
   <div class="field">
     <%= f.label :property_id %>
     <%= f.collection_select(:property_id, Property.all, :id, :name, {include_blank: true }) %>
