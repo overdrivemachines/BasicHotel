@@ -1,56 +1,40 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Property Settings</h1>
+
 <p>
   <strong>Name:</strong>
   <%= @property.name %>
-</p>
-
-<% if (@address != nil) %>
-  <p>
+  <br>
+  <% if (@address != nil) %>
     <strong>Address 1:</strong>
     <%= @address.address1 %>
-  </p>
-
-  <p>
+    <br>
     <strong>Address 2:</strong>
     <%= @address.address2 %>
-  </p>
-
-  <p>
+    <br>
     <strong>City:</strong>
     <%= @address.city %>
-  </p>
-
-  <p>
+    <br>
     <strong>State:</strong>
     <%= @address.state %>
-  </p>
-
-  <p>
+    <br>
     <strong>Zip:</strong>
     <%= @address.zip %>
-  </p>
-
-  <p>
+    <br>
     <strong>Country:</strong>
     <%= @address.country %>
-  </p>
-
-  <p>
+    <br>
     <strong>Phone:</strong>
     <%= @address.phone %>
-  </p>
-<% end %>
+    <br>
+  <% end %>
 
-<p>
   <strong>Access code:</strong>
   <%= @property.access_code %>
-</p>
-
-<p>
+  <br>
   <strong>Notes:</strong>
   <%= @property.notes %>
 </p>
 
-<%= link_to 'Edit', edit_property_path(@property) %> |
-<%= link_to 'Back', properties_path %>
+<%= link_to 'Edit', edit_property_path(@property) %>
