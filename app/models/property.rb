@@ -13,6 +13,7 @@
 class Property < ApplicationRecord
 	has_one :address, as: :addressable, dependent: :destroy
 	has_many :users
+	has_many :room_types
 
 	validates :name, presence: true
 	validates :access_code, presence: true
