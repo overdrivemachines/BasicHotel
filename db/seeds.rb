@@ -19,7 +19,7 @@ user.username = "admin"
 user.firstname = "Dipen"
 user.lastname = "Chauhan"
 user.skip_confirmation!
-user.save!
+user.save(validate: false) # Required for first user
 user.username = "admin"
 user.save
 puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.password}"
@@ -40,7 +40,7 @@ puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.passw
 	p.access_code = SecureRandom.hex(3)
 	p.address = a
 	p.save
-	puts "Created Property #{p.name}"
+	puts "Created Property #{p.name}: #{p.access_code}"
 end
 
 20.times do
@@ -54,7 +54,7 @@ end
 	user.property_id = 1 + rand(Property.count - 1)
 	user.skip_confirmation!
 	user.save!
-	puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.password}"
+	puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.password} #{user.property.name}"
 end
 
 user = User.new
