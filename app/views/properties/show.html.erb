@@ -2,6 +2,7 @@
 
 <h1>Property Settings</h1>
 
+<h2>Details</h2>
 <p>
   <strong>Name:</strong>
   <%= @property.name %>
@@ -35,6 +36,16 @@
   <br>
   <strong>Notes:</strong>
   <%= @property.notes %>
+  <br>
+  <%= link_to 'Edit Property', edit_property_path(@property) %>
 </p>
 
-<%= link_to 'Edit', edit_property_path(@property) %>
+<h2>Users</h2>
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= user.firstname %> <%= user.lastname %> <%= user.username %> (<%= user.email %>) 
+      <%= link_to "Remove", users_dissociate_property_path(:user => {:id => user.id} ), :method => :patch, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>

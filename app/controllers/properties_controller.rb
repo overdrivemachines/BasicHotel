@@ -15,6 +15,7 @@ class PropertiesController < ApplicationController
   # GET /properties/1.json
   def show
     @address = @property.address
+    @users = @property.users
   end
 
   # GET /properties/new
@@ -45,7 +46,8 @@ class PropertiesController < ApplicationController
       puts "Address Created by #{current_user}"
     else
       # Address couldn't be saved
-      render :new
+      flash[:alert] = "Address couldn't be saved"
+      redirect_to new_property_url
       return
     end
 
