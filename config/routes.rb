@@ -36,6 +36,7 @@
 #
 
 Rails.application.routes.draw do
+  resources :room_types
 	# Guide: 
 	# http://www.theodinproject.com/courses/ruby-on-rails/lessons/routing
 	
