@@ -2,6 +2,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
+  # http://jacopretorius.net/2014/03/adding-custom-fields-to-your-devise-user-model-in-rails-4.html
+  # http://www.peoplecancode.com/tutorials/adding-custom-fields-to-devise
+
   # GET /resource/sign_up
   # def new
   #   super
@@ -36,6 +39,33 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  # PATCH /users/dissociate_property
+  def dissociate_property
+    user = User.where(id: user_params[:id].to_i)
+    
+    if (user == nil)
+      flash[:alert] = "User does not exist"
+      if (current_user.property_id != nil)
+        redirect_to current_user.property
+      else
+        redirect_to root_url
+      end
+      return
+    end
+    user = user[0]
+    user.property_id = nil
+    if user.save
+      flash[:notice] = "Removed user"
+    else
+      flash[:alert] = "Could not dissociate property"
+    end
+    if (current_user.property_id != nil)
+      redirect_to current_user.property
+    else
+      redirect_to root_url
+    end
+  end
+
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -59,4 +89,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def user_params
+    params.require(:user).permit(:id)
+  end
 end
