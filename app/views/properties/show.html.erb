@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Property Settings</h1>
 
 <h2>Details</h2>
@@ -39,6 +37,32 @@
   <br>
   <%= link_to 'Edit Property', edit_property_path(@property) %>
 </p>
+
+<h2>Room Types</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @room_types.each do |room_type| %>
+      <%= content_tag_for(:tr, room_type) do %>
+        <td><%= room_type.code %></td>
+        <td><%= room_type.name %></td>
+        <td><%= room_type.description %></td>
+        <td><%= link_to 'Edit', edit_room_type_path(room_type), remote: true %></td>
+        <td><%= link_to 'Destroy', room_type, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="new-property-room-type-form-container"></div>
+<%= link_to 'New Room Type', new_property_room_type_path(@property), remote: true, class: "new-property-room-type-link" %>
 
 <h2>Users</h2>
 <ul>
