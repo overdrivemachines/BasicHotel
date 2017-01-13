@@ -1,0 +1,8 @@
+<!-- Needs room_type -->
+<%= content_tag_for(:tr, room_type) do %>
+  <td><%= room_type.code %></td>
+  <td><%= room_type.name %></td>
+  <td><%= room_type.description %></td>
+  <td><%= link_to 'Edit', edit_room_type_path(room_type), remote: true %></td>
+  <td><%= link_to 'Destroy', room_type, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
