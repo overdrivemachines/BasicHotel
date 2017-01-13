@@ -15,7 +15,12 @@ class PropertiesController < ApplicationController
   # GET /properties/1.json
   def show
     @address = @property.address
+
+    # For displaying all users
     @users = @property.users
+
+    # For displaying all room types
+    @room_types = @property.room_types
   end
 
   # GET /properties/new
