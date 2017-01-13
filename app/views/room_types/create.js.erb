@@ -1,0 +1,13 @@
+// Inserts the newly created room type into the DOM
+// Needs @room_type
+<% if @room_type.errors.any? %>
+	// @room_type did not save, display errors
+	$("#new_room_type").prepend('<%= j( render(partial: "form_errors", locals: {room_type: @room_type}) ) %>');
+<% else %>
+	// @room_type successfully saved, display the new room type
+	$("table.room-types tbody").append('<%= j(render @room_type, room_type: @room_type) %>');
+	// Hide the new form
+	$("div.new-property-room-type-form-container").empty();
+	$("div.new-property-room-type-form-container").hide();
+	$("a.new-property-room-type-link").show();
+<% end %>
