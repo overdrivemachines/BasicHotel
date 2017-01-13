@@ -41,6 +41,11 @@ gem 'phony_rails'
 # Flexible authentication solution
 gem 'devise'
 
+# content_tag_for, div_for
+# Eg: <%= content_tag_for(:tr, @articles) do |article| %>
+# Eg: <%= div_for(@article, class: "frontpage") do %>
+gem 'record_tag_helper', '~> 1.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
