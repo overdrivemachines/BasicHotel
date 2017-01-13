@@ -1,0 +1,3 @@
+// Needs variable @room_type
+
+$("#new_room_type").prepend('<%= j( render(partial: "form_errors", locals: {room_type: @room_type}) ) %>');

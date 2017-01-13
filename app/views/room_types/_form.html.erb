@@ -1,4 +1,4 @@
-<%= form_for(room_type, remote: true) do |f| %>
+<%= form_for([property, room_type], remote: true) do |f| %>
   <% if room_type.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(room_type.errors.count, "error") %> prohibited this room_type from being saved:</h2>

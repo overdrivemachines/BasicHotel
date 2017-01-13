@@ -1,0 +1,13 @@
+<!-- Needs room_type -->
+
+<% if room_type.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(room_type.errors.count, "error") %> prohibited this room_type from being saved:</h2>
+
+    <ul>
+    <% room_type.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
