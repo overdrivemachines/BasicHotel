@@ -1,0 +1,23 @@
+// Needs @property and @address
+
+// Functions
+// https://www.sitepoint.com/5-ways-declare-functions-jquery/
+
+// Hide the new property link
+$("a.new-property-link").hide();
+
+// Display the form container
+$("div.new-property-form-container").empty();
+$("div.new-property-form-container").show();
+
+// Insert the _form.html.erb partial
+$("div.new-property-form-container").append('<%= j( render(partial: "form", locals: {property: @property, address: @address}) ) %>');
+
+// Executes when cancel is clicked
+function hideNewPropertyFormContainer() {
+	$("div.new-property-form-container").empty();
+	$("div.new-property-form-container").hide();
+	$("a.new-property-link").show();
+}
+// Insert the cancel button
+$("div.new-property-form-container").append('<a href="javascript:void(0);" onclick="hideNewPropertyFormContainer()">Cancel</a>');
