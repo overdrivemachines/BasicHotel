@@ -29,6 +29,11 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> | 
+    <% if room_type.id.nil? %>
+      <a id="new_room_type_cancel" href="javascript:void(0);" onclick="hideNewRoomTypeFormContainer()">Cancel</a>
+    <% else %>
+      <a id="<%= dom_id(room_type) %>_cancel" href="javascript:void(0);" onclick="hideEditRoomTypeForm('<%= dom_id(room_type) %>')">Cancel</a>
+    <% end %>
   </div>
 <% end %>
