@@ -1,22 +1,25 @@
 // This runs when new is clicked
 // Hide the new room type link
-$("a.new-property-room-type-link").hide();
 
-// Display the form container
-$("div.new-property-room-type-form-container").empty();
-$("div.new-property-room-type-form-container").show();
+var $form_container = $("div.new_room_type_form_container");
+var $new_link = $("a.new_room_type_link");
 
-// Insert the _form.html.erb partial
-$("div.new-property-room-type-form-container").append('<%= j( render(partial: "form", locals: {property: @property, room_type: @room_type}) ) %>');
+// Hide the new link
+$new_link.hide();
 
-// Check if function exists
-// if (typeof hideNewPropertyRoomTypeFormContainer == 'function') {
-// 	alert("function exists");
-// }
-function hideNewPropertyRoomTypeFormContainer() {
-	$("div.new-property-room-type-form-container").empty();
-	$("div.new-property-room-type-form-container").hide();
-	$("a.new-property-room-type-link").show();
+// Clear the form container
+$form_container.empty();
+// Display the form continer
+$form_container.show();
+// Insert the _form.html.erb partial inside the form container
+$form_container.append('<%= j( render(partial: "form", locals: {property: @property, room_type: @room_type}) ) %>');
+
+// Called when cancel is clicked
+function hideNewRoomTypeFormContainer() {
+	// Clear the form container
+	$form_container.empty();
+	// Hide the form container
+	$form_container.hide();
+	// Show the new link
+	$new_link.show();
 }
-// Insert the cancel button
-$("div.new-property-room-type-form-container").append('<a href="javascript:void(0);" onclick="hideNewPropertyRoomTypeFormContainer()">Cancel</a>');
