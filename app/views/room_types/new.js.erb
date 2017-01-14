@@ -1,5 +1,5 @@
 // This runs when new is clicked
-// Hide the new property link
+// Hide the new room type link
 $("a.new-property-room-type-link").hide();
 
 // Display the form container
@@ -7,7 +7,7 @@ $("div.new-property-room-type-form-container").empty();
 $("div.new-property-room-type-form-container").show();
 
 // Insert the _form.html.erb partial
-$("div.new-property-room-type-form-container").append('<%= j( render(partial: "room_types/form", locals: {property: @property, room_type: @room_type}) ) %>');
+$("div.new-property-room-type-form-container").append('<%= j( render(partial: "form", locals: {property: @property, room_type: @room_type}) ) %>');
 
 // Check if function exists
 // if (typeof hideNewPropertyRoomTypeFormContainer == 'function') {
