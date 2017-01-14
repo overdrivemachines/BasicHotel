@@ -1,0 +1,6 @@
+// Replace contents of the table row
+$("tr#<%= dom_id(@room_type) %>").empty();
+$("tr#<%= dom_id(@room_type) %>").append('<td colspan="5"></td>');
+$("tr#<%= dom_id(@room_type) %> td").append("<h3>Edit Room Type</h3>");
+// Insert the form
+$("tr#<%= dom_id(@room_type) %> td").append('<%= j( render(partial: "form", locals: {property: nil, room_type: @room_type}) ) %>');
