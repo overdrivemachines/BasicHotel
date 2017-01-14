@@ -38,15 +38,9 @@ class RoomTypesController < ApplicationController
   end
 
   # PATCH/PUT /room_types/1
-  # PATCH/PUT /room_types/1.json
   def update
-    respond_to do |format|
-      if @room_type.update(room_type_params)
-        format.html { redirect_to @room_type.property, notice: 'Room type was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
-    end
+    @room_type.update(room_type_params)
+    # notice: 'Room type was successfully updated.'
   end
 
   # DELETE /room_types/1
