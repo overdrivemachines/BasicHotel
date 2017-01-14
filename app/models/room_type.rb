@@ -13,7 +13,7 @@
 
 class RoomType < ApplicationRecord
   belongs_to :property
-  before_save :covert_code_to_upper_case
+  before_save :convert_code_to_upper_case
 
   validates :name, presence: true
   validates :code, presence: true, :length => { :maximum => 4 }
@@ -21,6 +21,6 @@ class RoomType < ApplicationRecord
 
   private
   def convert_code_to_upper_case
-  	self.code.uppercase!  	
+  	self.code.upcase!
   end
 end
