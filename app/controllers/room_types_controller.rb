@@ -14,6 +14,7 @@ class RoomTypesController < ApplicationController
 
   # GET /room_types/1/edit
   def edit
+    @property = @room_type.property
   end
 
   # POST /properties/:property_id/room_types(.:format)
