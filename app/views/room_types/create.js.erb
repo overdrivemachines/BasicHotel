@@ -1,13 +1,21 @@
 // Inserts the newly created room type into the DOM
 // Needs @room_type
+var $form_container = $("div.new_room_type_form_container");
+var $new_link = $("a.new_room_type_link");
+var $form = $("form#new_room_type");
+var $tbody = $("table.room-types tbody");
+
 <% if @room_type.errors.any? %>
 	// @room_type did not save, display errors
-	$("#new_room_type").prepend('<%= j( render(partial: "form_errors", locals: {room_type: @room_type}) ) %>');
+	$form.prepend('<%= j( render(partial: "form_errors", locals: {room_type: @room_type}) ) %>');
 <% else %>
 	// @room_type successfully saved, display the new room type
-	$("table.room-types tbody").append('<%= j(render @room_type, room_type: @room_type) %>');
-	// Hide the new form
-	$("div.new-property-room-type-form-container").empty();
-	$("div.new-property-room-type-form-container").hide();
-	$("a.new-property-room-type-link").show();
+	$tbody.append('<%= j(render @room_type, room_type: @room_type) %>');
+
+	// Clear the form container
+	$form_container.empty();
+	// Hide the form container
+	$form_container.hide();
+	// Show the new link
+	$new_link.show();
 <% end %>
