@@ -50,6 +50,9 @@ Rails.application.routes.draw do
 	# Best Practices:
 	# https://github.com/bbatsov/rails-style-guide
 
+	# Rails generate:
+	# http://railsguides.net/advanced-rails-model-generators/
+
 	root 'properties#index'
 
 	devise_scope :user do
