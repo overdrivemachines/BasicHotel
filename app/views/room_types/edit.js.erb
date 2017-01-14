@@ -1,6 +1,26 @@
+// Requires: @room_type
+
+$row = $("tr#<%= dom_id(@room_type) %>");
+
 // Replace contents of the table row
-$("tr#<%= dom_id(@room_type) %>").empty();
-$("tr#<%= dom_id(@room_type) %>").append('<td colspan="5"></td>');
-$("tr#<%= dom_id(@room_type) %> td").append("<h3>Edit Room Type</h3>");
+$row.empty();
+$row.append('<td colspan="5"></td>');
+
+$form_container = $("tr#<%= dom_id(@room_type) %> td");
+
+$form_container.append("<h3>Edit Room Type</h3>");
 // Insert the form
-$("tr#<%= dom_id(@room_type) %> td").append('<%= j( render(partial: "form", locals: {property: nil, room_type: @room_type}) ) %>');
+$form_container.append('<%= j( render(partial: "form", locals: {property: nil, room_type: @room_type}) ) %>');
+
+
+// Cancel link function
+function hideEditRoomTypeForm(id) {
+	alert(id);
+
+	$row = $("tr#" + id);
+	// Clear the row
+	$row.empty();
+
+	// Display @room_type in the row
+	$row.replaceWith('<%= j(render @room_type, room_type: @room_type) %>');
+}
