@@ -7,6 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # require 'securerandom'
 
+# Random Records: https://hashrocket.com/blog/posts/rails-quick-tips-random-records
+
 User.destroy_all
 Property.destroy_all
 
@@ -43,6 +45,7 @@ puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.passw
 	puts "Created Property #{p.name}: #{p.access_code}"
 end
 
+# Create 20 users and assign them properties randomly
 20.times do
 	user = User.new
 	user.email = Faker::Internet.email
@@ -51,7 +54,8 @@ end
 	user.password_confirmation = random_password	
 	user.firstname = Faker::Name.first_name
 	user.lastname = Faker::Name.last_name
-	user.property_id = 1 + rand(Property.count - 1)
+	# user.property_id = 1 + rand(Property.count - 1)
+	user.property_id = Property.pluck(:id).shuffle[0]
 	user.skip_confirmation!
 	user.save!
 	puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.password} #{user.property.name}"
@@ -71,3 +75,14 @@ user.save!
 user.username = "admin2"
 user.save
 puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.password}"
+
+# Create 20 Room Types and assign them properties randomly
+20.times do
+	rt = RoomType.new
+	rt.name = Faker::Beer.name
+	rt.code = rt.name[0, 2] + SecureRandom.hex(1).to_s
+	rt.description = Faker::Beer.style
+	rt.property_id = Property.pluck(:id).shuffle[0]
+	rt.save
+	puts "Created RoomType #{rt.code} #{rt.name} for Property #{rt.property.name}"
+end
