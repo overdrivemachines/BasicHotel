@@ -1,14 +1,6 @@
 # == Route Map
 #
 #                        Prefix Verb   URI Pattern                                       Controller#Action
-#                         rooms GET    /rooms(.:format)                                  rooms#index
-#                               POST   /rooms(.:format)                                  rooms#create
-#                      new_room GET    /rooms/new(.:format)                              rooms#new
-#                     edit_room GET    /rooms/:id/edit(.:format)                         rooms#edit
-#                          room GET    /rooms/:id(.:format)                              rooms#show
-#                               PATCH  /rooms/:id(.:format)                              rooms#update
-#                               PUT    /rooms/:id(.:format)                              rooms#update
-#                               DELETE /rooms/:id(.:format)                              rooms#destroy
 #                          root GET    /                                                 properties#index
 #     users_dissociate_property PATCH  /users/dissociate_property(.:format)              users/registrations#dissociate_property
 #              new_user_session GET    /users/sign_in(.:format)                          devise/sessions#new
@@ -33,6 +25,14 @@
 #                   user_unlock GET    /users/unlock(.:format)                           devise/unlocks#show
 #                               POST   /users/unlock(.:format)                           devise/unlocks#create
 # current_user_joins_properties PATCH  /properties/current_user_joins(.:format)          properties#current_user_joins
+#               room_type_rooms GET    /room_types/:room_type_id/rooms(.:format)         rooms#index
+#                               POST   /room_types/:room_type_id/rooms(.:format)         rooms#create
+#            new_room_type_room GET    /room_types/:room_type_id/rooms/new(.:format)     rooms#new
+#                     edit_room GET    /rooms/:id/edit(.:format)                         rooms#edit
+#                          room GET    /rooms/:id(.:format)                              rooms#show
+#                               PATCH  /rooms/:id(.:format)                              rooms#update
+#                               PUT    /rooms/:id(.:format)                              rooms#update
+#                               DELETE /rooms/:id(.:format)                              rooms#destroy
 #           property_room_types GET    /properties/:property_id/room_types(.:format)     room_types#index
 #                               POST   /properties/:property_id/room_types(.:format)     room_types#create
 #        new_property_room_type GET    /properties/:property_id/room_types/new(.:format) room_types#new
@@ -52,7 +52,7 @@
 #
 
 Rails.application.routes.draw do
-  resources :rooms
+  
 	# Guide: 
 	# http://www.theodinproject.com/courses/ruby-on-rails/lessons/routing
 	
@@ -84,7 +84,9 @@ Rails.application.routes.draw do
 	resources :properties do
 		# PATCH does a partial update and PUT is used to update the whole resource
 		patch 'current_user_joins', on: :collection
-		resources :room_types, shallow: true
+		resources :room_types, shallow: true do
+			resources :rooms, shallow: true
+		end
 	end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
