@@ -44,6 +44,7 @@
 #
 
 Rails.application.routes.draw do
+  resources :rooms
 	# Guide: 
 	# http://www.theodinproject.com/courses/ruby-on-rails/lessons/routing
 	
