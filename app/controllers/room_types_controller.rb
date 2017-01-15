@@ -26,15 +26,6 @@ class RoomTypesController < ApplicationController
     @room_type.property_id = params[:property_id].to_i
     @room_type.save
 
-    # respond_to do |format|
-    #   if @room_type.save
-    #     format.html { redirect_to @room_type, notice: 'Room type was successfully created.' }
-    #     format.json { render :show, status: :created, location: @room_type }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @room_type.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /room_types/1
@@ -47,10 +38,7 @@ class RoomTypesController < ApplicationController
   # DELETE /room_types/1.json
   def destroy
     @room_type.destroy
-    respond_to do |format|
-      format.html { redirect_to @room_type.property, notice: 'Room type was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # notice: 'Room type was successfully destroyed.'
   end
 
   private

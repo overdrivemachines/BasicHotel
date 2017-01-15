@@ -14,7 +14,7 @@ $form_container.show();
 // Insert the _form.html.erb partial inside the form container
 $form_container.append('<%= j( render(partial: "form", locals: {property: @property, room_type: @room_type}) ) %>');
 
-// Called when cancel is clicked
+// Cancel link function
 function hideNewRoomTypeFormContainer() {
 	// Clear the form container
 	$form_container.empty();
