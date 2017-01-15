@@ -86,3 +86,16 @@ puts "Created User #{user.firstname} #{user.lastname} #{user.email}:#{user.passw
 	rt.save
 	puts "Created RoomType #{rt.code} #{rt.name} for Property #{rt.property.name}"
 end
+
+# Create 100 Rooms and assign them to room types randomly
+200.times do
+	room = Room.new
+	room.room_number = Faker::Number.number(3)
+	room.location = Faker::Address.time_zone
+	room.vacant = true
+	room.clean = true
+	room.inventory = true
+	room.room_type_id = RoomType.pluck(:id).shuffle[0]
+	room.save
+	puts "Created Room #{room.room_number}:#{room.room_type.code}:#{room.room_type.property.name}"
+end
