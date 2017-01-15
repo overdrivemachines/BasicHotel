@@ -1,6 +1,14 @@
 # == Route Map
 #
 #                        Prefix Verb   URI Pattern                                       Controller#Action
+#                         rooms GET    /rooms(.:format)                                  rooms#index
+#                               POST   /rooms(.:format)                                  rooms#create
+#                      new_room GET    /rooms/new(.:format)                              rooms#new
+#                     edit_room GET    /rooms/:id/edit(.:format)                         rooms#edit
+#                          room GET    /rooms/:id(.:format)                              rooms#show
+#                               PATCH  /rooms/:id(.:format)                              rooms#update
+#                               PUT    /rooms/:id(.:format)                              rooms#update
+#                               DELETE /rooms/:id(.:format)                              rooms#destroy
 #                          root GET    /                                                 properties#index
 #     users_dissociate_property PATCH  /users/dissociate_property(.:format)              users/registrations#dissociate_property
 #              new_user_session GET    /users/sign_in(.:format)                          devise/sessions#new
@@ -53,6 +61,12 @@ Rails.application.routes.draw do
 
 	# Rails generate:
 	# http://railsguides.net/advanced-rails-model-generators/
+
+	# Migration Validations:
+	# http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column
+
+	# Migration:
+	# http://api.rubyonrails.org/classes/ActiveRecord/Migration.html
 
 	root 'properties#index'
 

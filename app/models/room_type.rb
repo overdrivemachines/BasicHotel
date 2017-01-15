@@ -13,6 +13,7 @@
 
 class RoomType < ApplicationRecord
   belongs_to :property
+  has_many :rooms
   before_save :convert_code_to_upper_case
 
   validates :name, presence: true
