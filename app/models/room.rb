@@ -15,4 +15,9 @@
 
 class Room < ApplicationRecord
   belongs_to :room_type
+
+  validates :room_number, presence: true
+  validates :vacant, presence: true 
+  validates :clean, presence: true
+  validates :inventory, presence: true
 end
