@@ -1,5 +1,10 @@
-<!-- Requires: room -->
-<%= form_for(room, remote: true) do |f| %>
+<!-- Requires: property, room -->
+<% if room.new_record? %>
+  <h2>New Room</h2>
+<% else %>
+  <h2>Edit Room</h2>
+<% end %>
+<%= form_for([property, room], remote: true) do |f| %>
   
   <div class="field">
     <%= f.label :room_number %>
@@ -10,16 +15,17 @@
     <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
+  <% if !room.new_record? %>
+    <div class="field">
+      <%= f.label :vacant %>
+      <%= f.check_box :vacant %>
+    </div>
 
-  <div class="field">
-    <%= f.label :vacant %>
-    <%= f.check_box :vacant %>
-  </div>
-
-  <div class="field">
-    <%= f.label :clean %>
-    <%= f.check_box :clean %>
-  </div>
+    <div class="field">
+      <%= f.label :clean %>
+      <%= f.check_box :clean %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :inventory %>
@@ -28,7 +34,7 @@
 
   <div class="field">
     <%= f.label :room_type_id %>
-    <%= f.collection_select(:room_type_id, room.property.room_types, :id, :dd_label, {include_blank: false }) %>
+    <%= f.collection_select(:room_type_id, property.room_types, :id, :dd_label, {include_blank: false }) %>
 
   </div>
 
