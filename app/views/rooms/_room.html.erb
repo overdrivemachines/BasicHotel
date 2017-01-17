@@ -1,0 +1,12 @@
+<!-- Requires: room -->
+<%= content_tag_for(:tr, room) do %>
+  <td><%= room.room_number %></td>
+  <td><%= room.location %></td>
+  <td><%= room.vacant %></td>
+  <td><%= room.clean %></td>
+  <td><%= room.inventory %></td>
+  <td><%= room.room_type.code %></td>
+  <td><%= link_to 'Show', room %></td>
+  <td><%= link_to 'Edit', edit_room_path(room) %></td>
+  <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
