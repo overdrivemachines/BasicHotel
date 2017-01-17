@@ -1,16 +1,6 @@
-<%= form_for(room) do |f| %>
-  <% if room.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
-
-      <ul>
-      <% room.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<!-- Requires: room -->
+<%= form_for(room, remote: true) do |f| %>
+  
   <div class="field">
     <%= f.label :room_number %>
     <%= f.number_field :room_number %>
@@ -38,10 +28,16 @@
 
   <div class="field">
     <%= f.label :room_type_id %>
-    <%= f.text_field :room_type_id %>
+    <%= f.collection_select(:room_type_id, room.property.room_types, :id, :dd_label, {include_blank: false }) %>
+
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> | 
+    <% if room.new_record? %>
+      <a id="new_room_cancel" href="javascript:void(0);" onclick="hideNewRoomFormContainer()">Cancel</a>
+    <% else %>
+      <a id="<%= dom_id(room) %>_cancel" href="javascript:void(0);" onclick="hideEditRoomForm('<%= dom_id(room) %>')">Cancel</a>
+    <% end %>
   </div>
 <% end %>
