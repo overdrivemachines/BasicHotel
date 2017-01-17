@@ -1,0 +1,26 @@
+// This runs when new is clicked
+// Hide the new room link
+// Requires: @property, @room
+
+var $form_container = $("#new_room_form_container");
+var $new_link = $("#new_room_link");
+
+// Hide the new link
+$new_link.hide();
+
+// Clear the form container
+$form_container.empty();
+// Display the form continer
+$form_container.show();
+// Insert the _form.html.erb partial inside the form container
+$form_container.append('<%= j( render(partial: "form", locals: {property: @property, room: @room}) ) %>');
+
+// Cancel link function
+function hideNewRoomFormContainer() {
+	// Clear the form container
+	$form_container.empty();
+	// Hide the form container
+	$form_container.hide();
+	// Show the new link
+	$new_link.show();
+}
